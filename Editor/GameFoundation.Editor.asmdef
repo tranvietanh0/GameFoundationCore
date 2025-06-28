@@ -4,6 +4,7 @@
     "references": [
         "GameFoundation.Models",
         "GameFoundation.Utilities",
+        "GameFoundation.UIModule",
         "Unity.Addressables",
         "UniTask.Addressables",
         "Unity.ResourceManager",
