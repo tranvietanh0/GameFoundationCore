@@ -1,0 +1,23 @@
+{
+    "name": "GameFoundation.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GameFoundation.Models",
+        "GameFoundation.Utilities",
+        "Unity.Addressables",
+        "UniTask.Addressables",
+        "Unity.ResourceManager",
+        "UniTask"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
