@@ -5,7 +5,9 @@
         "VContainer",
         "GameFoundationCore.UIModule",
         "GameFoundationCore.AssetLibrary",
-        "GameFoundationCore.Signals"
+        "GameFoundationCore.Signals",
+        "UniT.Logging.DI",
+        "GameFoundationCore.DI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

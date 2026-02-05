@@ -1,0 +1,113 @@
+﻿namespace GameFoundationCore.Scripts.UIModule.Utilities.UIStuff
+{
+    using UnityEngine;
+    using UnityEngine.UI;
+
+    /// <summary>
+    ///     Safe area implementation for notched mobile devices. Usage:
+    ///     (1) Add this component to the top level of any GUI panel.
+    ///     (2) If the panel uses a full screen background image, then create an immediate child and put the component on that
+    ///     instead, with all other elements childed below it.
+    ///     This will allow the background image to stretch to the full extents of the screen behind the notch, which looks
+    ///     nicer.
+    ///     (3) For other cases that use a mixture of full horizontal and vertical background stripes, use the Conform X & Y
+    ///     controls on separate elements as needed.
+    /// </summary>
+    public class SafeArea : MonoBehaviour
+    {
+        [SerializeField] private bool conformX = true; // Conform to screen safe area on X-axis (default true, disable to ignore)
+
+        [SerializeField] private bool conformY = true; // Conform to screen safe area on Y-axis (default true, disable to ignore)
+        [SerializeField] private bool stretch  = true; // Stretch to fill the safe area (default true, disable to ignore)
+
+        private Rect          lastSafeArea = new(0, 0, 0, 0);
+        private RectTransform panel;
+        private CanvasScaler  canvasScaler;
+
+        private void Awake()
+        {
+            this.panel        = this.GetComponent<RectTransform>();
+            this.canvasScaler = this.GetComponentInParent<CanvasScaler>();
+
+            if (this.panel == null)
+            {
+                Debug.LogError("Cannot apply safe area - no RectTransform found on " + this.name);
+                Destroy(this.gameObject);
+            }
+
+            this.Refresh();
+        }
+
+        private void Update()
+        {
+            this.Refresh();
+        }
+
+        private void Refresh()
+        {
+            var safeArea = this.GetSafeArea();
+
+            if (safeArea != this.lastSafeArea) this.ApplySafeArea(safeArea);
+        }
+
+        private Rect GetSafeArea()
+        {
+            var safeArea = Screen.safeArea;
+            return safeArea;
+        }
+
+        private void ApplySafeArea(Rect r)
+        {
+            this.lastSafeArea = r;
+
+            // Ignore x-axis?
+            if (!this.conformX)
+            {
+                r.x     = 0;
+                r.width = Screen.width;
+            }
+
+            // Ignore y-axis?
+            if (!this.conformY)
+            {
+                r.y      = 0;
+                r.height = Screen.height;
+            }
+
+            // Convert safe area rectangle from absolute pixels to normalised anchor coordinates
+            var anchorMin = r.position;
+            var anchorMax = r.position + r.size;
+            anchorMin.x /= Screen.width;
+            anchorMin.y /= Screen.height;
+            anchorMax.x /= Screen.width;
+            anchorMax.y /= Screen.height;
+            if (this.stretch)
+            {
+                this.panel.anchorMin = anchorMin;
+                this.panel.anchorMax = anchorMax;
+                this.panel.sizeDelta = Vector2.zero;
+            }
+            else
+            {
+                // Assuming that the Screen match mode is Expand
+                this.panel.anchorMin = new((anchorMax.x + anchorMin.x) / 2, (anchorMax.y + anchorMin.y) / 2);
+                this.panel.anchorMax = new((anchorMax.x + anchorMin.x) / 2, (anchorMax.y + anchorMin.y) / 2);
+                var widthRatio          = anchorMax.x - anchorMin.x;
+                var heightRatio         = anchorMax.y - anchorMin.y;
+                var rectTransformSize   = this.canvasScaler.GetComponent<RectTransform>().rect.size;
+                var referenceResolution = this.canvasScaler.referenceResolution;
+
+                // all the screens smaller than the reference resolution are also set here
+                this.panel.sizeDelta = referenceResolution * new Vector2(widthRatio, heightRatio);
+
+                // TODO: calculate dynamically. this is just for portrait reference resolution
+                if (rectTransformSize.y > this.panel.sizeDelta.y)
+                {
+                    this.panel.sizeDelta = new(this.panel.sizeDelta.x, rectTransformSize.y * heightRatio);
+                }
+            }
+
+            //Debug.LogFormat("New safe area applied to {0}: x={1}, y={2}, w={3}, h={4} on full extents w={5}, h={6}", name, r.x, r.y, r.width, r.height, Screen.width, Screen.height);
+        }
+    }
+}
