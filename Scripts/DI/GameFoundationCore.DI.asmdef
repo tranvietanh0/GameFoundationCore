@@ -1,0 +1,16 @@
+{
+    "name": "GameFoundationCore.DI",
+    "rootNamespace": "GameFoundationCore.DI",
+    "references": [
+        "VContainer"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
