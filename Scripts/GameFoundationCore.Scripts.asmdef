@@ -1,9 +1,11 @@
 {
-    "name": "GameFoundationCore.DI",
-    "rootNamespace": "GameFoundationCore.DI",
+    "name": "GameFoundationCore.Scripts",
+    "rootNamespace": "GameFoundationCore.Scripts",
     "references": [
         "VContainer",
-        "UniT.Extensions"
+        "GameFoundationCore.UIModule",
+        "GameFoundationCore.AssetLibrary",
+        "GameFoundationCore.Signals"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

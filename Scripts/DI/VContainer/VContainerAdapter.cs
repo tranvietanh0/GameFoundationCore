@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using GameFoundationCore.DI.Submodules.GameFoundationCore.Scripts.DI;
+    using GameFoundationCore.Scripts.DI;
     using UnityEngine;
     using UnityEngine.Scripting;
     using global::VContainer.Internal;

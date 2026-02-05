@@ -1,4 +1,4 @@
-﻿namespace GameFoundationCore.DI.Submodules.GameFoundationCore.Scripts.DI
+﻿namespace GameFoundationCore.Scripts.DI
 {
     public interface ILateTickable
     {

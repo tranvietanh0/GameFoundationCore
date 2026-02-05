@@ -1,9 +1,12 @@
 {
-    "name": "GameFoundationCore.DI",
-    "rootNamespace": "GameFoundationCore.DI",
+    "name": "GameFoundationCore.Signals",
+    "rootNamespace": "GameFoundationCore.Signals",
     "references": [
+        "GameFoundationCore.DI",
         "VContainer",
-        "UniT.Extensions"
+        "MessagePipe.VContainer",
+        "MessagePipe",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

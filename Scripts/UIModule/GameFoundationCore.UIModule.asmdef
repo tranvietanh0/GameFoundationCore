@@ -1,3 +1,25 @@
-﻿{
-  "name": "GameFoundationCore.UIModule"
+{
+    "name": "GameFoundationCore.UIModule",
+    "rootNamespace": "GameFoundationCore.UIModule",
+    "references": [
+        "UniTask",
+        "GameFoundationCore.DI",
+        "VContainer",
+        "GameFoundationCore.Signals",
+        "GameFoundationCore.AssetLibrary",
+        "UniT.Logging",
+        "Unity.ResourceManager",
+        "Unity.Addressables",
+        "UniTask.Addressables",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
