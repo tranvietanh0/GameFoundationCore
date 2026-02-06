@@ -5,7 +5,9 @@
     using GameFoundationCore.Scripts.DI.VContainer;
     using GameFoundationCore.Scripts.Signals;
     using GameFoundationCore.Scripts.UIModule;
+    using GameFoundationCore.Scripts.Utilities;
     using GameFoundationCore.Scripts.Utilities.ApplicationServices;
+    using GameFoundationCore.Scripts.Utilities.ObjectPool;
     using GameFoundationCore.Scripts.Utilities.UserData;
     using UniT.Logging.DI;
     using UnityEngine;
@@ -26,6 +28,8 @@
             builder.RegisterLoggerManager();
 
             builder.Register<GameAssets>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<ObjectPoolManager>(Lifetime.Singleton);
+            builder.Register<AudioService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<HandleLocalUserDataServices>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.DeclareSignal<UserDataLoadedSignal>();
