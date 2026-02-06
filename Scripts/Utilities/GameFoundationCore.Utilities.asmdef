@@ -12,8 +12,9 @@
         "Unity.ResourceManager",
         "UniTask.Addressables",
         "UniTask.DOTween",
-        "DOTWeen.Modules",
-        "DOTWeenPro.Scripts"
+        "Unity.Addressables",
+        "DOTween.Modules",
+        "DOTweenPro.EditorScripts"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
