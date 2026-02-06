@@ -1,6 +1,7 @@
 ﻿namespace GameFoundationCore.Scripts
 {
     using GameFoundationCore.Scripts.AssetLibrary;
+    using GameFoundationCore.Scripts.BlueprintFlow;
     using GameFoundationCore.Scripts.DI.VContainer;
     using GameFoundationCore.Scripts.Signals;
     using GameFoundationCore.Scripts.UIModule;
@@ -17,6 +18,7 @@
             builder.Register<VContainerAdapter>(Lifetime.Scoped).AsImplementedInterfaces();
 
             builder.RegisterSignalBus();
+            builder.RegisterBlueprints();
             builder.RegisterScreenManager();
 
             builder.RegisterLoggerManager();

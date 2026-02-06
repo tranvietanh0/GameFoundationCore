@@ -2,7 +2,13 @@
     "name": "GameFoundationCore.BlueprintFlow",
     "rootNamespace": "GameFoundationCore.BlueprintFlow",
     "references": [
-        "UniTask"
+        "UniTask",
+        "GameFoundationCore.Models",
+        "GameFoundationCore.Utilities",
+        "UniT.Extensions",
+        "GameFoundationCore.Signals",
+        "UniT.Logging",
+        "VContainer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

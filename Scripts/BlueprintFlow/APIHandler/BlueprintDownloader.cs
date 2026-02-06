@@ -1,4 +1,4 @@
-﻿namespace GameFoundationCore.Scripts.BlueprintFlow.APIHandler
+﻿namespace BlueprintFlow.APIHandler
 {
     using System;
     using System.Net;
