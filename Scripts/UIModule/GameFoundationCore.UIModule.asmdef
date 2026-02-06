@@ -11,7 +11,8 @@
         "Unity.ResourceManager",
         "Unity.Addressables",
         "UniTask.Addressables",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "OSA.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
