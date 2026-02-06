@@ -1,0 +1,77 @@
+﻿namespace GameFoundationCore.Scripts.UIModule.Utilities
+{
+    using System.Collections.Generic;
+    using Cysharp.Threading.Tasks;
+    using GameFoundationCore.Scripts.DI;
+    using GameFoundationCore.Scripts.Signals;
+    using GameFoundationCore.Scripts.UIModule.MVP;
+    using GameFoundationCore.Scripts.UIModule.ScreenFlow.BaseScreen.Presenter;
+    using GameFoundationCore.Scripts.UIModule.ScreenFlow.BaseScreen.View;
+    using GameFoundationCore.Scripts.UIModule.ScreenFlow.Signals;
+    using UniT.Extensions;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using VContainer;
+
+    public static class ExtensionMethod
+    {
+        //Remove all Button Listener On View
+        public static void OnRemoveButtonListener(this MonoBehaviour view)
+        {
+            var buttons = view.GetComponentsInChildren<Button>();
+
+            foreach (var b in buttons) b.onClick.RemoveAllListeners();
+        }
+
+        //check Object trigger With other object
+        public static bool CheckObjectOnBound(this BaseView view, Bounds bounds, Bounds g)
+        {
+            return bounds.Intersects(g);
+        }
+
+        public static void InstantiateUIPresenter<TPresenter, TView, TModel>(this IDependencyContainer container, ref TPresenter presenter, TView view, TModel model)
+            where TPresenter : IUIItemPresenter<TView, TModel> where TView : IUIView
+        {
+            if (presenter == null)
+            {
+                presenter = container.Instantiate<TPresenter>();
+                presenter.SetView(view);
+            }
+            presenter.BindData(model);
+        }
+
+        public static async UniTask<TPresenter> InstantiateUIPresenter<TPresenter, TModel>(this IDependencyContainer container, Transform parentView, TModel model)
+            where TPresenter : IUIItemPresenter<IUIView, TModel>
+        {
+            var presenter = container.Instantiate<TPresenter>();
+            await presenter.SetView(parentView);
+            presenter.BindData(model);
+
+            return presenter;
+        }
+
+        //FillChild Width with parent Width
+        public static void FillChildWidthWithParentWidth(this IUIPresenter presenter, RectTransform childRect, RectTransform parentRect)
+        {
+            var v = childRect.sizeDelta;
+            v.x                 = parentRect.rect.width;
+            childRect.sizeDelta = v;
+        }
+
+        public static async void Add<TPresenter, TModel>(this List<TPresenter> listPresenter, TPresenter presenter, Transform parentView, TModel model)
+            where TPresenter : IUIItemPresenter<IUIView, TModel>
+        {
+            await presenter.SetView(parentView);
+            presenter.BindData(model);
+            listPresenter.Add(presenter);
+        }
+        public static void InitScreenManually<T>(this IContainerBuilder builder, bool autoBindData = false) where T : IScreenPresenter
+        {
+            builder.RegisterBuildCallback(container => container.Resolve<SignalBus>().Fire(new ManualInitScreenSignal
+            {
+                ScreenPresenter   = container.Instantiate<T>(),
+                IncludingBindData = autoBindData,
+            }));
+        }
+    }
+}

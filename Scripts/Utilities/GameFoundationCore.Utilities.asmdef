@@ -5,7 +5,9 @@
         "UniTask",
         "GameFoundationCore.Models",
         "UniT.Extensions",
-        "UniT.Logging"
+        "UniT.Logging",
+        "VContainer",
+        "GameFoundationCore.Signals"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

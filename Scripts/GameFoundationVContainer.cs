@@ -5,6 +5,7 @@
     using GameFoundationCore.Scripts.DI.VContainer;
     using GameFoundationCore.Scripts.Signals;
     using GameFoundationCore.Scripts.UIModule;
+    using GameFoundationCore.Scripts.Utilities.ApplicationServices;
     using GameFoundationCore.Scripts.Utilities.UserData;
     using UniT.Logging.DI;
     using UnityEngine;
@@ -12,7 +13,7 @@
 
     public static class GameFoundationVContainer
     {
-        public static void RegisterGameFoundation(this IContainerBuilder builder, Transform transform)
+        public static void RegisterGameFoundation(this IContainerBuilder builder, Transform rootTransform)
         {
             builder.Register<VContainerWrapper>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<VContainerAdapter>(Lifetime.Scoped).AsImplementedInterfaces();
@@ -20,6 +21,7 @@
             builder.RegisterSignalBus();
             builder.RegisterBlueprints();
             builder.RegisterScreenManager();
+            builder.RegisterApplicationServices(rootTransform);
 
             builder.RegisterLoggerManager();
 

@@ -12,7 +12,8 @@
         "Unity.Addressables",
         "UniTask.Addressables",
         "Unity.TextMeshPro",
-        "OSA.Core"
+        "OSA.Core",
+        "UniT.Extensions"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
