@@ -4,6 +4,7 @@
     using GameFoundationCore.Scripts.DI.VContainer;
     using GameFoundationCore.Scripts.Signals;
     using GameFoundationCore.Scripts.UIModule;
+    using GameFoundationCore.Scripts.Utilities.UserData;
     using UniT.Logging.DI;
     using UnityEngine;
     using VContainer;
@@ -21,6 +22,9 @@
             builder.RegisterLoggerManager();
 
             builder.Register<GameAssets>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<HandleLocalUserDataServices>(Lifetime.Singleton).AsImplementedInterfaces();
+
+            builder.DeclareSignal<UserDataLoadedSignal>();
         }
     }
 }

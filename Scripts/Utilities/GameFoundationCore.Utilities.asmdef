@@ -1,0 +1,19 @@
+{
+    "name": "GameFoundationCore.Utilities",
+    "rootNamespace": "GameFoundationCore.Utilities",
+    "references": [
+        "UniTask",
+        "GameFoundationCore.Models",
+        "UniT.Extensions",
+        "UniT.Logging"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
